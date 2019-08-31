@@ -44,7 +44,7 @@ Java , swift, 리눅스, 크롬, 파이어폭스 같은 오픈소스가 주변�
 **title : 국제화/번역과 함께 하는 오픈소스에 대한 경험 및 노하우**
 
 오픈스택 코리아
-KOSSLAB[http://korea.gnu.org/manual/release/gettext]??
+[KOSSLAB](http://korea.gnu.org/manual/release/gettext)??
 
 **PO파일에 대해서 좀더 알아보는 게 좋을거같아
 
