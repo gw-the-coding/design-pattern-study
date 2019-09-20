@@ -6,7 +6,7 @@ SRP를 위배하는 안티 패턴의 극단적인 예로 전지전능 객체가 
 
 메모장 하나가 있을때
 
-```
+```cpp
 struct Journal
 {
 string title;
@@ -17,7 +17,7 @@ explicit Journal(const string& title) : title{title} {}
 ```
 
 메모장의 각 항목을 기입된 순서대로 저장하는 부분을 구성
-```
+```cpp
 void Journal::add(const string& entry)
 {
 static int count =1;
@@ -32,7 +32,7 @@ j.add("I ate a bug");
 이때 add함수가 메모장안에 구성되는 것은 매우 자연스러운 일이다.
 
 만약 메모장을 영구적으로 파일에 저장하는 기능을 만들려면 어디에 구성해야할까?
-```
+```cpp
 void Journal::save(const string& filename)
 {
 ofstream ofs(filename);
@@ -45,7 +45,7 @@ ofs << s << endl;
 데이터 저장 방식이 바뀔 때마다 그러한 클래스들을 일일이 모두 수정해야 한다.
 
 따라서, 파일 저장 기능은 메모장과 별도로 취급하여 별도의 클래스로 만드느 것이 바람직하다.
-```
+```cpp
 struct PersistenceManager
 {
 static void save(const Journal& j, const string& filename)
