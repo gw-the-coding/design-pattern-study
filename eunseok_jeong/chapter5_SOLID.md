@@ -9,10 +9,10 @@ SRP를 위배하는 안티 패턴의 극단적인 예로 전지전능 객체가 
 ```cpp
 struct Journal
 {
-string title;
-vector<string> entries;
+  string title;
+  vector<string> entries;
 
-explicit Journal(const string& title) : title{title} {}
+  explicit Journal(const string& title) : title{title} {}
 };
 ```
 
@@ -20,9 +20,9 @@ explicit Journal(const string& title) : title{title} {}
 ```cpp
 void Journal::add(const string& entry)
 {
-static int count =1;
-entries.push_back(boost::lexical_cast<string>(count++)
-+": " + entry);
+  static int count =1;
+  entries.push_back(boost::lexical_cast<string>(count++)
+    +": " + entry);
 }
 
 Journal j{"Dear Diary"};
@@ -35,9 +35,9 @@ j.add("I ate a bug");
 ```cpp
 void Journal::save(const string& filename)
 {
-ofstream ofs(filename);
-for (auto& s : entries)
-ofs << s << endl;
+  ofstream ofs(filename);
+  for (auto& s : entries)
+    ofs << s << endl;
 }
 ```
 이 방식은 문제가 있다. 메모장의 책임은 메모 항목들을 기입/관리하느 것이지 디스크에 쓰느 것이 아니다.
@@ -48,13 +48,72 @@ ofs << s << endl;
 ```cpp
 struct PersistenceManager
 {
-static void save(const Journal& j, const string& filename)
-{
-ofstream ofs(filename);
-for (auto& s : j.entries)
-ofs << s << endl;
-}
+  static void save(const Journal& j, const string& filename)
+  {
+    ofstream ofs(filename);
+    for (auto& s : j.entries)
+      ofs << s << endl;
+  }
 };
 ```
+
+-열림-닫힘 원칙(Open-Closed Principle, OCP)
+열림-닫힘 원칙으 타입이 확장에느 열려 있지만 수정에느 닫혀 있도록 강제하는 것을 뜻함
+기존코드의 수정없이(배포된 코드의 수정없이) 기능을 확장할 수 있도록 구현해야한다.
+
+
+데이터베이스에 어떤 제품군에 대한 정보가 저장되어 있다고 할때,
+
+```cpp
+enum class Color { Red, Green, Blue };
+enum class Size { Small, Medium, Large };
+
+struct Product
+{
+  string name;
+  Color color;
+  Size size;
+};
+```
+
+주어진 제품 집합을 조건에 따라 필터링 하는 기능 구성
+
+```cpp
+struct ProductFilter
+{
+  typedef vector<Product*> Items;
+};
+
+ProductFilter::Items ProductFilter::by_color(Items items, Color color)
+{
+  Items result;
+  for (auto& i : items)
+    if (i->color == color)
+      result.push_back(i);
+  return result;
+}
+```
+만약 사이즈에 의해서 필터링을 한다면?
+
+```
+ProductFilter::Items ProductFilter::by_size(Items items, Size size)
+{
+  Items result;
+  for (auto& i : items)
+    if (i->size == size)
+      result.push_back(i);
+  return result;
+}
+```
+
+확실히 뭔가 같은 작업을 반복하는 느낌..
+
+또 다시 요구사항이 들어와서, 이번엔 컬러와 사이즈르 모두 지정해서 필터링 하려 한다면?
+또 다시 메소드를 구성해야 할까?
+
+
+
+
+
 
 
