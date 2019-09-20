@@ -5,7 +5,7 @@ SRP를 위배하는 안티 패턴의 극단적인 예로 전지전능 객체가 
 이러한 객체와 함께 일하는 것으 대단히 어렵다.
 
 메모장 하나가 있을때
-'''
+₩₩₩
 struct Journal
 {
 string title;
@@ -13,7 +13,7 @@ vector<string> entries;
 
 explicit Journal(const string& title) : title{title} {}
 };
-'''
+₩₩₩
 메모장의 각 항목을 기입된 순서대로 저장하는 부분을 구성
 '''
 void Journal::add(const string& entry)
