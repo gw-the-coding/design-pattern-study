@@ -1,11 +1,12 @@
 package com.company.state;
 
-public class BigMario implements State{
+public class NormalMario implements State{
+
     private Mario mario;
 
-    public BigMario(Mario mario){
+    public NormalMario(Mario mario){
         this.mario = mario;
-//        System.out.println("[BIG MARIO]");
+//        System.out.println("[NORMAL MARIO]");
     }
 
     @Override
@@ -20,8 +21,7 @@ public class BigMario implements State{
 
     @Override
     public void damage() {
-        System.out.println("Size Down");
-        mario.state = mario.ChangeState("NormalMario");
+        System.out.println("GAME OVER");
     }
 
     @Override

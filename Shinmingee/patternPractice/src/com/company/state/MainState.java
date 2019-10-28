@@ -3,9 +3,16 @@ package com.company.state;
 public class MainState {
 
     public static void main(String[] args) {
-        Mario m1 = new Mario();
+        Mario mario = new Mario();
 
-        m1.
+        mario.bigMushroom();
+        mario.damage();
+        mario.fireMushroom();
+        mario.aButton();
+        mario.bButton();
+        mario.damage();
+        mario.aButton();
+        mario.damage();
 
     }
 
